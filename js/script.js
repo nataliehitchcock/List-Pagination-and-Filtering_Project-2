@@ -11,7 +11,7 @@ const eachStudent = studentList.children;
 const studentsPerPage = 10;
 
 // Create a function to hide all of the items in the list except for the ten you want to show
-// Tip: Keep in mind that with a list of 54 students, the last page will only display four
+
 
 const totalPages = () => {
    let pageNumbers = Math.ceil(eachStudent.length / studentsPerPage);
@@ -30,7 +30,45 @@ const tenStudents = () => {
 }
 // Create and append the pagination links - Creating a function that can do this is a good approach
 
-const appendPageLinks = (list) => {
+function addPaginationLinks (list) {
+  const totalPages = Math.ceil(list.length / recordsPerPage);
+  const newDiv = document.createElement('div');
+  newDiv.className = 'pagination';
+  const divPage = document.querySelector('.page');
+  divPage.appendChild(newDiv);
+  const ulPagLinks = document.createElement('ul');
+  newDiv.appendChild(ulPagLinks);
+  showPage(studentList, 1);
+
+  for (let i = 1; i <= totalPages; i++) {
+     const li = document.createElement('li');
+     ulPagLinks.appendChild(li);
+     const a = document.createElement('a');
+     li.appendChild(a);
+     a.textContent = i;
+     a.href = '#';
+     const firstA = document.querySelector('a');
+     firstA.className = 'active';
+     const aList = document.querySelectorAll('a');
+
+     //Adding an event listener to each link
+     for (let j = 1; j <= aList.length; j++) {
+        a.addEventListener('click', (event) => {
+           showPage(studentList, j);
+       
+           for (let k = 0; k < aList.length; k++) {
+              aList[k].className = '';
+           }
+           event.target.className = 'active';
+     });
+     }
+  }
+}
+
+//Calling Pagination function
+addPaginationLinks(studentList);
+
+
    // Select page class in the div, put into a variable
 
      let page = document.body.querySelector('.page');
@@ -57,21 +95,6 @@ const appendPageLinks = (list) => {
         buttonPage.appendChild(li);
         li.appendChild(a);
       }
-// Add an event listener to the pagination div
-
-	buttonPage.addEventListener('click',(event) => {
-	let buttonNumber = parseInt(event.target.textContent);
-	let maximum = buttonNumber * 10;
-	let minimum = maximum - 10;
-	for (let i = 0; i < eachStudent.length; i++) {
-	if (i >= minimum && i < maximum) {
-	eachStudent[i].style.display = '';
-	}    else {
-	eachStudent[i].style.display = 'none';
-	}
-	}
-	})
-	};
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
 // Tip: If you created a function above to show/hide list items, it could be helpful here
