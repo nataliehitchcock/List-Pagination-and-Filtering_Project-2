@@ -26,8 +26,8 @@ const tenStudents = () => {
    }
 }
 // Create and append the pagination links
-function addPaginationLinks (list) {
-  const totalPages = Math.ceil(list.length / studentsPerPage);
+function addPaginationLinks (studentList) {
+  const totalPages = Math.ceil(studentList.length / studentsPerPage);
   const newDiv = document.createElement('div');
   newDiv.className = 'pagination';
   const divPage = document.querySelector('.page');
