@@ -16,15 +16,16 @@ const totalPages = () => {
    return pageNumbers;
 }
 // Add a function which displays 10 students per page
-const tenStudents = () => {
-   for (let i = 0; i < eachStudent.length; i++) {
-       if (i < studentsPerPage) {
-          eachStudent[i].style.display= 'block';
-       } else {
-           eachStudent[i].style.display= 'none';
-       }
-   }
+const showPage = (list, page) => {
+  for (let i = 0; i < eachStudent.length; i++) {
+    if (i < studentsPerPage) {
+       eachStudent[i].style.display= 'block';
+    } else {
+        eachStudent[i].style.display= 'none';
+    }
 }
+}
+
 // Create and append the pagination links
 function addPaginationLinks (studentList) {
   const totalPages = Math.ceil(studentList.length / studentsPerPage);
